@@ -1,8 +1,6 @@
 <?php
 require_once 'helper.php';
 
-const BEAR_DB_FILE_PATH = '/Users/zvonimir/Library/Containers/net.shinyfrog.bear/Data/Documents/Application Data/database.sqlite';
-
 function searchNotes($searchTerms)
 {
     $query = generateNotesQuery(tokenizeInput($searchTerms));
