@@ -15,13 +15,13 @@ function searchTagLists($listNames)
 
 function generateTagListQuery($tags)
 {
-    $query = 'SELECT Z_PK ,Z_ENT, Z_OPT, ZMODIFICATIONDATE, ZTITLE FROM ZSFNOTETAG';
+    $query = 'select distinct ZSFNOTETAG.ZTITLE, ZSFNOTETAG.Z_PK from ZSFNOTE join Z_5TAGS on Z_5TAGS.Z_5NOTES = ZSFNOTE.Z_PK join ZSFNOTETAG on ZSFNOTETAG.Z_PK = Z_5TAGS.Z_10TAGS where ZSFNOTE.ZTRASHED = 0';
 
     $tag = array_shift($tags);
-    $query .= " WHERE ( ZTITLE LIKE '%" . $tag . "%'";
+    $query .= " AND ( ZSFNOTETAG.ZTITLE LIKE '%" . $tag . "%'";
     // if more than one tag
     foreach ($tags as $tag) {
-        $query .= " OR ZTITLE LIKE '%" . $tag . "%'";
+        $query .= " OR ZSFNOTETAG.ZTITLE LIKE '%" . $tag . "%'";
     }
 
     return $query . ')';
